@@ -52,9 +52,9 @@ defmodule CanvasApp.Members do
 
   """
 
-def create_association() do
-  location_params = %{street: "street", num: "num", zip: "zip", city: "city", latitude: 1.0, longitude: 1.0}
-  user_params = %{name: "name", surname: "surname"}
+def create_association(user_params, location_params) do
+ # location_params = %{street: "street", num: "num", zip: "zip", city: "city", latitude: 1.0, longitude: 1.0}
+ # user_params = %{name: "name", surname: "surname"}
 
   # Create and insert the Location
   {:ok, location} = create_location(location_params)
@@ -77,6 +77,14 @@ defp create_user_with_location(user_params, location) do
   |> Ecto.Changeset.put_assoc(:location, location)
   |> Repo.insert()
 end
+
+def get_users_by_location(location) do
+
+  from u in User,
+    where: u.location_id == ^location.id,
+    select: u
+end
+
 
 
   def create_user(attrs \\ %{}) do

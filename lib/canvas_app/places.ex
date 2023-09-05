@@ -68,6 +68,12 @@ defmodule CanvasApp.Places do
       %Ecto.Changeset{data: %Location{}}
 
   """
+
+  def get_location_with_users!(id) do
+    Repo.get(Location, id) |> Repo.preload(:users)
+  end
+
+
   def change_location(%Location{} = location, attrs \\ %{}) do
     Location.changeset(location, attrs)
   end

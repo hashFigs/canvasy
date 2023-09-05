@@ -1,19 +1,17 @@
-<.header>
-  Location <%= @location.id %>
-  <:subtitle>This is a location record from your database.</:subtitle>
-  <:actions>
-    <.link patch={~p"/locations/#{@location}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit location</.button>
-    </.link>
-  </:actions>
-</.header>
+
+  <h2>Members Info:</h2>
+  <h3>Total Members: <%= length(@location.users) %></h3>
 
 
-<%= @member.name %>
-<%= @member.surname %>
+  <%= for user <- @location.users do %>
+       <.list>
+     <:item title="Name"><%= user.name %></:item>
+     <:item title="Name"><%= user.surname %></:item>
+     </.list>
+  <% end %>
 
 
-
+ <h2>Location Info:</h2> 
 <.list>
   <:item title="Adress"><%= @location.street %></:item>
   <:item title="Number"><%= @location.num %></:item>
