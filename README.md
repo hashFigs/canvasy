@@ -1,6 +1,6 @@
 
 
-![alt text](https://github.com/hashFigs/canvasy/blol/main/assets/png/canvasify-logo.png?raw=true)
+![alt text](https://github.com/hashFigs/canvasy/blob/main/assets/png/canvasify-logo.png?raw=true)
 
 
 
