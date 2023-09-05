@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+<.header>
+  Listing Locations
+  <:actions>
+    <.link patch={~p"/locations/new"}>
+      <.button>New Location</.button>
+    </.link>
+  </:actions>
+</.header>
+
+
+
+
+
+<div class="w-3/4 h-70" id="googleMap2" phx-update="ignore">
+    <div id="googleMap" style="width:100%;height:400px;"></div>
+</div>
+
+
+
+<.table
+  id="locations"
+  rows={@streams.locations}
+  row_click={fn {_id, location} -> JS.navigate(~p"/locations/#{location}") end}
+> 
+   <:col :let={{_id, location}} label="Location Id"><%= location.id %></:col>
+  <:col :let={{_id, location}} label="Street"><%= location.street %></:col>
+  <:col :let={{_id, location}} label="Number"><%= location.num %></:col>
+  <:col :let={{_id, location}} label="City"><%= location.city %></:col>
+  <:col :let={{_id, location}} label="Zip"><%= location.zip %></:col>
+  <:col :let={{_id, location}} label="Latitude"><%= location.latitude %></:col>
+  <:col :let={{_id, location}} label="Longitude"><%= location.longitude %></:col>
+  <:action :let={{_id, location}}>
+    <div class="sr-only">
+      <.link navigate={~p"/locations/#{location}"}>Show</.link>
+    </div>
+    <.link patch={~p"/locations/#{location}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, location}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: location.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="location-modal" show on_cancel={JS.patch(~p"/locations")}>
+  <.live_component
+    module={CanvasAppWeb.LocationLive.FormComponent}
+    id={@location.id || :new}
+    title={@page_title}
+    action={@live_action}
+    location={@location}
+    patch={~p"/locations"}
+  />
+</.modal>
+
+
+</body>
+</html>
