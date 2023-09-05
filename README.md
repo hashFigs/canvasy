@@ -1,4 +1,11 @@
 
+
+![alt text](https://github.com/hashFigs/canvasy/tree/main/assets/png/canvasify.png?raw=true)
+
+
+
+
+
 ```sh
 mix phx.new canvas_app
 ```
