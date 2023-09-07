@@ -29,13 +29,12 @@ defmodule CanvasAppWeb.LocationLive.Index do
   end
 
   defp apply_action(socket, :index, _params) do
-    google_maps_url ="https://maps.googleapis.com/maps/api/js?key=#{ System.get_env("GOOGLE_MAPS_API_KEY") }&callback=myMap"
-    IO.inspect(google_maps_url)
+
 
     socket
     |> assign(:page_title, "Listing Locations")
     |> assign(:location, nil)
-    |> assign(:google_maps_url, google_maps_url)
+    |> assign(:pins, Places.list_locations())
   end
 
   @impl true

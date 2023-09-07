@@ -32,11 +32,10 @@
 
 
 
-
-
 <div class="w-3/4 h-70" id="googleMap2" phx-update="ignore">
     <div id="googleMap" style="width:100%;height:400px;"></div>
 </div>
+
 
 
 <.table
@@ -67,6 +66,7 @@
   </:action>
 </.table>
 
+
 <.modal :if={@live_action in [:new, :edit]} id="location-modal" show on_cancel={JS.patch(~p"/locations")}>
   <.live_component
     module={CanvasAppWeb.LocationLive.FormComponent}
@@ -85,6 +85,21 @@
       zoom: 12,
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+    <%= for location <- @pins do %>
+    
+    console.log("marker")
+    var lat = <%= location.latitude %>;
+    var lng = <%= location.longitude %>;
+    var id = '<%= (location.id) %>'; // Use 'j' to safely escape the HTML
+
+    new google.maps.Marker({
+      position: { lat: lat, lng: lng },
+      map: map,
+      title: id,
+    });
+
+  <% end %>
     
   };
 </script>
