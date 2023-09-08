@@ -89,7 +89,7 @@ defmodule CanvasAppWeb.UserLive.FormComponent do
 
 
     #case Members.create_user( user_params) do
-      IO.puts ("###!")
+    IO.puts ("###!")
     IO.inspect(user_location_params)
     IO.puts ("###!")
     %{"city" => city, "latitude" => latitude, "longitude" => longitude, "name" => name, "num" => num, "street"=> street, "surname"=> surname, "zip" => zip} =  user_location_params
