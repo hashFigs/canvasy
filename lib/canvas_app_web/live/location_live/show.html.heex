@@ -1,32 +1,39 @@
 
   <body onload="loadGoogleMaps()">
-  
-  <h2>Members Info:</h2>
-  <h3>Total Members: <%= length(@location.users) %></h3>
-
-  
-  <div class="w-3/4 h-70" id="googleMap2" phx-update="ignore">
+   
+  <div class="w-full h-70" id="googleMap2" phx-update="ignore">
     <div id="googleMap" style="width:100%;height:400px;"></div>
  </div>
 
+ <div class="grid grid-cols-2 gap-4 my-4">
+    <div class="font-semibold" >Members Info:</div>
+    <div class="font-semibold" >Total Members: <%= length(@location.users) %></div>
+ </div>
 
-  <%= for user <- @location.users do %>
-       <.list>
-     <:item title="Name"><%= user.name %></:item>
-     <:item title="Name"><%= user.surname %></:item>
-     </.list>
-  <% end %>
+ <%= for user <- @location.users do %>
+  <div class="rounded-lg bg-orange-200 my-4 p-4 shadow-md">
+    <div class="grid grid-cols-2 gap-4">
+      <div ><b>Name:</b> <%= user.name %></div>
+      <div> <b>Surname:</b> <%= user.surname %></div>
+    </div>
+  </div>
+ <% end %>
+
+  <div class="rounded-lg bg-orange-200 my-4 p-4 shadow-md">
+    <div class="grid grid-cols-2 gap-4">
+      <div ><b>Street:</b> <%= @location.street %></div>
+      <div> <b>Number:</b> <%= @location.num  %></div>
+      <div> <b>City:</b> <%= @location.city  %></div>
+      <div> <b>Zip:</b> <%= @location.zip %></div>
+      <div> <b>Latitude:</b> <%= @location.latitude %></div>
+      <div> <b>Longitude:</b> <%= @location.longitude %></div>
+    </div>
+  </div>
 
 
- <h2>Location Info:</h2> 
-<.list>
-  <:item title="Adress"><%= @location.street %></:item>
-  <:item title="Number"><%= @location.num %></:item>
-  <:item title="City"><%= @location.city %></:item>
-  <:item title="Zip"><%= @location.zip %></:item>
-  <:item title="Latitude"><%= @location.latitude %></:item>
-  <:item title="Longitude"><%= @location.longitude %></:item>
-</.list>
+
+
+
 
 <.back navigate={~p"/locations"}>Back to locations</.back>
 
