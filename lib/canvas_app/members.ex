@@ -9,7 +9,7 @@ defmodule CanvasApp.Members do
 
   alias CanvasApp.Members.User
   alias CanvasApp.Places.Location
-
+  alias CanvasApp.Places.MyGeocoder
   @doc """
   Returns the list of users.
 
@@ -57,7 +57,14 @@ def create_association(user_params, location_params) do
  # user_params = %{name: "name", surname: "surname"}
 
   # Create and insert the Location
-  {:ok, location} = create_location(location_params)
+
+  adress = "#{location_params.num}, #{location_params.street}, #{location_params.zip}, #{location_params.city}"
+  {:ok, {:ok,%{"lat" => lat, "lng" => lng}}}= MyGeocoder.geocode_address(adress)
+
+   geo_params = %{latitude: lat, longitude: lng}
+   place_params = Map.merge(location_params, geo_params)
+
+  {:ok, location} = create_location(place_params)
 
   # Create and insert the User, associating it with the Location
   {:ok, user} = create_user_with_location(user_params, location)

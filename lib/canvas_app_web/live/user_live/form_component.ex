@@ -32,8 +32,7 @@ defmodule CanvasAppWeb.UserLive.FormComponent do
         <.input field={@form[:num]} type="text" label="Number" />
         <.input field={@form[:city]} type="text" label="City" />
         <.input field={@form[:zip]} type="number" label="Zip" />
-        <.input field={@form[:latitude]} type="number" label="Latitude" step="any" />
-        <.input field={@form[:longitude]} type="number" label="Longitude" step="any" />
+
         <:actions>
           <.button phx-disable-with="Saving...">Save User</.button>
         </:actions>
@@ -85,15 +84,9 @@ defmodule CanvasAppWeb.UserLive.FormComponent do
 
   defp save_user(socket, :new, user_location_params) do
 
+    %{"city" => city, "name" => name, "num" => num, "street"=> street, "surname"=> surname, "zip" => zip} =  user_location_params
 
-
-
-    #case Members.create_user( user_params) do
-    IO.puts ("###!")
-    IO.inspect(user_location_params)
-    IO.puts ("###!")
-    %{"city" => city, "latitude" => latitude, "longitude" => longitude, "name" => name, "num" => num, "street"=> street, "surname"=> surname, "zip" => zip} =  user_location_params
-    location_params = %{street: street, num: num, zip: zip, city: city, latitude: latitude, longitude: longitude}
+    location_params = %{street: street, num: num, zip: zip, city: city}
     user_params = %{name: name, surname: surname}
 
 

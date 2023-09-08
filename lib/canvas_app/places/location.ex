@@ -19,6 +19,6 @@ defmodule CanvasApp.Places.Location do
   def changeset(location, attrs) do
     location
     |> cast(attrs, [:street, :num, :zip, :city, :latitude, :longitude])
-    |> validate_required([:street, :num, :zip, :city, :latitude, :longitude])
+    |> validate_required([:street, :num, :zip, :city])
   end
 end
