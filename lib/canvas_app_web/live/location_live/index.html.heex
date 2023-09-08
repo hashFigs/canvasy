@@ -86,8 +86,40 @@
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
+         // Check if Geolocation is available
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        // Create a marker for the user's location
+        var userMarker = new google.maps.Marker({
+          position: userLocation,
+          map: map,
+          title: 'Your Location',
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 8, // Adjust the size of the blue dot
+            fillColor: 'blue', // Color of the dot
+            fillOpacity: 1, // Opacity of the dot
+            strokeColor: 'transparent', // Make the stroke color transparent
+            strokeOpacity: 0 // Make the stroke opacity transparent
+          }
+        });
+
+        // Center the map on the user's location
+        map.setCenter(userLocation);
+      });
+    }
+
+
+
+
+
+
     <%= for location <- @pins do %>
-    
     console.log("marker")
     var lat = <%= location.latitude %>;
     var lng = <%= location.longitude %>;
