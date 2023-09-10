@@ -79,19 +79,14 @@ defmodule CanvasApp.Places do
   end
 
   def find_location_by(attrs) do
-    from l in Location,
-      where: ^attrs in [l.street, l.num, l.zip, l.city, l.latitude, l.longitude],
+    %{city: city, num: num, street: street, zip: zip} = attrs
+    query = from l in Location,
+      where: l.city == ^city and l.num == ^num and l.street == ^street and l.zip == ^zip,
       limit: 1
+
+     Repo.one(query)
   end
 
-  def location_exists?(attrs) do
 
-    from(l in Location,
-      where: ^attrs in [l.city],
-      select: true,
-      limit: 1
-    )
-    |> CanvasApp.Repo.one()
-  end
 
 end

@@ -5,6 +5,7 @@ defmodule CanvasApp.Members do
 
   import Ecto.Query, warn: false
   import Ecto.Changeset
+  alias CanvasApp.Places
   alias CanvasApp.Repo
 
   alias CanvasApp.Members.User
@@ -64,7 +65,27 @@ def create_association(user_params, location_params) do
    geo_params = %{latitude: lat, longitude: lng}
    place_params = Map.merge(location_params, geo_params)
 
-  {:ok, location} = create_location(place_params)
+##
+
+  location =
+    case Places.find_location_by(location_params) do
+      nil -> create_location(location_params)
+      existing_location -> existing_location
+    end
+
+
+
+
+  #check if location exists
+  IO.puts "HOL!!@@@"
+
+  #location =  Places.find_location_by(location_params)
+
+
+  IO.inspect(location, label: "location")
+
+  #if it doesnt exist create
+  #{:ok, location} = create_location(place_params)
 
   # Create and insert the User, associating it with the Location
   {:ok, user} = create_user_with_location(user_params, location)
