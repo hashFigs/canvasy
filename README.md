@@ -16,6 +16,7 @@ Canvasify is a powerful platform designed to streamline the canvassing process f
 - **User Management:** Manage your canvassing teams and assign roles and permissions.
 
 - **Location Database:** Maintain a database of canvassing locations with detailed information.
+- **A/B testing:** Easily manage A/B testing questions
 
 ## Getting Started
 
