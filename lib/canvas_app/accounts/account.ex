@@ -7,6 +7,8 @@ defmodule CanvasApp.Accounts.Account do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    field :admin, :boolean, default: false # Add this line for the admin field
+
 
     timestamps()
   end
@@ -36,7 +38,7 @@ defmodule CanvasApp.Accounts.Account do
   """
   def registration_changeset(account, attrs, opts \\ []) do
     account
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :admin])
     |> validate_email(opts)
     |> validate_password(opts)
   end

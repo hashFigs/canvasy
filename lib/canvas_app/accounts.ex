@@ -103,7 +103,7 @@ defmodule CanvasApp.Accounts do
 
   """
   def change_account_registration(%Account{} = account, attrs \\ %{}) do
-    Account.registration_changeset(account, attrs, hash_password: false, validate_email: false)
+    Account.registration_changeset(account, attrs, hash_password: false, validate_email: false, admin: false)
   end
 
   ## Settings

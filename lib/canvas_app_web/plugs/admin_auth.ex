@@ -8,7 +8,7 @@ defmodule CanvasAppWeb.Plugs.AdminAuth do
 
   def call(conn, _opts) do
     case conn.assigns[:current_account] do
-      %Account{email: "jordi@hashbrowns.dev"} = account ->
+      %Account{admin: true} = account ->
         # Handle the case where the email matches
         IO.puts("holaa admin! !!****")
         IO.inspect(account,  limit: :infinity)
