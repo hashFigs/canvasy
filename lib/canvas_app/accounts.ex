@@ -26,6 +26,19 @@ defmodule CanvasApp.Accounts do
     Repo.get_by(Account, email: email)
   end
 
+
+  ## @@@@ Todo: Remove
+  def get_all_accounts do
+    Repo.all(Account)
+  end
+
+  ## @@@@ Todo: Remove
+  def get_by_email(email) do
+    Repo.get_by(Account, email: email)
+  end
+
+
+
   @doc """
   Gets a account by email and password.
 

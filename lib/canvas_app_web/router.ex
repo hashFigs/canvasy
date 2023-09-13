@@ -13,6 +13,10 @@ defmodule CanvasAppWeb.Router do
     plug :fetch_current_account
   end
 
+  pipeline :admin do
+    plug CanvasAppWeb.Plugs.AdminAuth
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -72,16 +76,25 @@ defmodule CanvasAppWeb.Router do
   end
 
   scope "/", CanvasAppWeb do
-    pipe_through [:browser, :require_authenticated_account]
+    pipe_through [:browser, :require_authenticated_account ]
 
     live_session :require_authenticated_account,
       on_mount: [{CanvasAppWeb.AccountAuth, :ensure_authenticated}] do
       live "/accounts/settings", AccountSettingsLive, :edit
       live "/accounts/settings/confirm_email/:token", AccountSettingsLive, :confirm_email
 
-      live "/dashboard", AdminIndexLive
+     # live "/admin", AdminIndexLive
     end
   end
+
+  scope "/", CanvasAppWeb do
+    pipe_through [:browser, :require_authenticated_account, :admin]
+
+      live "/admin", AdminIndexLive
+  end
+
+
+
 
 
   scope "/", CanvasAppWeb do
