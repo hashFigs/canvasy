@@ -91,10 +91,16 @@ defmodule CanvasAppWeb.Router do
     pipe_through [:browser, :require_authenticated_account, :admin]
 
       live "/admin", AdminIndexLive
+      live "/admin/members", UserLive.Import, :import
+
   end
 
+  scope "/", CanvasAppWeb do
+    pipe_through [:browser]
 
-
+    get "/sample-csv", CsvController, :index
+    live "/users/import", UserLive.Import, :import
+  end
 
 
   scope "/", CanvasAppWeb do

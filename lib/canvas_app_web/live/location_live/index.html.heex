@@ -117,9 +117,11 @@
     var lat = <%= location.latitude %>;
     var lng = <%= location.longitude %>;
     var id = '<%= (location.id) %>'; // Use 'j' to safely escape the HTML
+    
+
 
     new google.maps.Marker({
-      position: { lat: lat, lng: lng },
+      position: new google.maps.LatLng( 29.98786051, -90.070510),
       map: map,
       title: id,
     });

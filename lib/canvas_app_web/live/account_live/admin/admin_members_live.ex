@@ -1,4 +1,4 @@
-defmodule CanvasAppWeb.AdminIndexLive do
+defmodule CanvasAppWeb.AdminMembersLive do
 
   use CanvasAppWeb, :live_view
 
