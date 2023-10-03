@@ -90,7 +90,7 @@ defmodule CanvasAppWeb.Router do
   scope "/", CanvasAppWeb do
     pipe_through [:browser, :require_authenticated_account, :admin]
 
-      live "/admin", AdminIndexLive
+      live "/admin", AccountLive.Admin.AdminIndexLive
       live "/admin/members", UserLive.Import, :import
 
   end
