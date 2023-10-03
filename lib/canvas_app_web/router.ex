@@ -91,6 +91,7 @@ defmodule CanvasAppWeb.Router do
     pipe_through [:browser, :require_authenticated_account, :admin]
 
       live "/admin", AccountLive.Admin.AdminIndexLive
+      live "/admin/dashboard", AccountLive.Admin.AdminDashboardLive
       live "/admin/members", UserLive.Import, :import
 
   end

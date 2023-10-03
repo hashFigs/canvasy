@@ -17,7 +17,18 @@
         <li class="text-[0.8125rem] leading-6 text-zinc-900">
           <%= @current_account.email %>
         </li>
-        <li>
+         <li>
+         <%= if @current_account.admin do %>   
+
+          <.link
+            href={~p"/admin"}
+             class="inline-block bg-orange-500 text-white px-4 py-1 text-sm font-semibold rounded-lg hover:bg-zinc-600"
+          >
+            AdminZone
+          </.link>   
+          <% end %>
+
+
           <.link
             href={~p"/accounts/settings"}
             class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
