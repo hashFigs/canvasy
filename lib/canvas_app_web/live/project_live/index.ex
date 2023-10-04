@@ -19,7 +19,7 @@ defmodule CanvasAppWeb.ProjectLive.Index do
 
   defp apply_action(socket, :index, _params) do
 
-    projects = Projects.list_projects()
+    #projects = Projects.list_projects()
 
     socket
     |> assign(:page_title, "Projects Index")

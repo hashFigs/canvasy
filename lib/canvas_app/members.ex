@@ -4,7 +4,6 @@ defmodule CanvasApp.Members do
   """
 
   import Ecto.Query, warn: false
-  import Ecto.Changeset
   alias CanvasApp.Places
   alias CanvasApp.Repo
 
@@ -60,12 +59,11 @@ def create_association(user_params, location_params) do
   # Create and insert the Location
 
   adress = "#{location_params.num}, #{location_params.street}, #{location_params.zip}, #{location_params.city}"
-  {:ok, {:ok,%{"lat" => lat, "lng" => lng}}}= MyGeocoder.geocode_address(adress)
+  {:ok, {:ok,%{"lat" => _lat, "lng" => _lng}}}= MyGeocoder.geocode_address(adress)
 
-   geo_params = %{latitude: lat, longitude: lng}
-   place_params = Map.merge(location_params, geo_params)
+   #geo_params = %{latitude: lat, longitude: lng}
+   #place_params = Map.merge(location_params, geo_params)
 
-##
 
   location =
     case Places.find_location_by(location_params) do

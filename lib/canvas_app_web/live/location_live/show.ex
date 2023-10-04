@@ -2,8 +2,8 @@ defmodule CanvasAppWeb.LocationLive.Show do
   use CanvasAppWeb, :live_view
 
   alias CanvasApp.Places
-  alias CanvasApp.Members
-  alias CanvasApp.Repo
+  #alias CanvasApp.Members
+  #alias CanvasApp.Repo
 
   @impl true
   def mount(_params, _session, socket) do

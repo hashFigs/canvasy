@@ -1,7 +1,7 @@
 defmodule CanvasApp.Places.MyGeocoder do
   require HTTPoison
 
-  @google_maps_api_key  System.get_env("GOOGLE_MAPS_API_KEY")
+  #@google_maps_api_key  System.get_env("GOOGLE_MAPS_API_KEY")
 
   @google_geolocating_api_key  System.get_env("GOOGLE_GEOLOCATING_API_KEY")
 

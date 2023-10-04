@@ -42,11 +42,18 @@
   <:col :let={{_id, user}} label="Surname"><%= user.surname %></:col>
   <:col :let={{_id, user}} label="location Id"><%= user.location_id %></:col>
   
-  <:action :let={{_id, user}}>
+  <:action :let={{_id, _user}}>
     <div class="sr-only">
+     <!--
+      TODO:
       <.link navigate={~p"/users/#{user}"}>Show</.link>alias
+      -->
     </div>
-    <.link patch={~p"/users/#{user}/edit"}>Edit</.link>
+    
+    <!--
+      TODO: 
+      <.link patch={~p"/users/#{user}/edit"}>Edit</.link>
+    -->
   </:action>
   <:action :let={{id, user}}>
     <.link
