@@ -30,7 +30,8 @@ defmodule CanvasAppWeb.Router do
     live "/locations/:id", LocationLive.Show, :show
     live "/locations/:id/edit", LocationLive.Show, :edit
 
-    live "/", LocationLive.Index, :index
+    #live "/", LocationLive.Index, :index
+    live "/", LandingLive.Index, :index
 
     live "/users", UserLive.Index, :index
     live "/users/new", UserLive.Index, :new
