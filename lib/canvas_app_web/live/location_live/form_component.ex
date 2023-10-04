@@ -2,7 +2,7 @@ defmodule CanvasAppWeb.LocationLive.FormComponent do
   use CanvasAppWeb, :live_component
 
   alias CanvasApp.Places
-  alias CanvasApp.Places.Location
+  #alias CanvasApp.Places.Location
 
 
 

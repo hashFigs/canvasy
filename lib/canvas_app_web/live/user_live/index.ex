@@ -19,7 +19,7 @@ defmodule CanvasAppWeb.UserLive.Index do
 
   defp apply_action(socket, :index, _params) do
 
-   users = Members.list_users()
+   #users = Members.list_users()
 
     socket
     |> assign(:page_title, "Listing Locations")
