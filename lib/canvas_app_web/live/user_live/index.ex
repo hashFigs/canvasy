@@ -17,13 +17,9 @@ defmodule CanvasAppWeb.UserLive.Index do
   end
 
 
-
-
   defp apply_action(socket, :index, _params) do
 
    users = Members.list_users()
-
-    IO.inspect(users)
 
     socket
     |> assign(:page_title, "Listing Locations")
