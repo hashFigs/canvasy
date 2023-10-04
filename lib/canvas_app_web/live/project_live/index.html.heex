@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Projects</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+<div class="flex">
+  <!-- Left Column (Menu) -->
+  <div class="bg-orange-400 text-white w-1/4 py-6">
+    <div class="text-center text-2xl font-semibold mb-6">Admin Menu</div>
+    <ul>
+      <li class="mb-2">
+        <a href="/admin/dashboard" class="block px-4 py-2 hover:bg-orange-600">Dashboard</a>
+      </li>
+      <li class="mb-2">
+        <a href="/admin/projects" class="block px-4 py-2 hover:bg-orange-600">Projects</a>
+      </li>
+      <li class="mb-2">
+        <a href="/admin/users" class="block px-4 py-2 hover:bg-orange-600">Users</a>
+      </li>
+      <li class="mb-2">
+        <a href="/locations" class="block px-4 py-2 hover:bg-orange-600">Locations</a>
+      </li>
+      <!-- Add more menu items as needed -->
+    </ul>
+  </div>
+  <!-- Right Column (Content) -->
+  <div class="w-3/4 p-6">
+
+<.header>
+  Listing Projects
+
+
+  <:actions>
+    <.link patch={~p"/projects/new"}>
+      <.button>New Project</.button>
+    </.link>
+  </:actions>
+
+</.header>
+
+
+<.table
+  id="projects"
+  rows={@streams.projects}
+>
+  <:col :let={{_id, project}} label="Name"><%= project.name %></:col>
+  <:col :let={{_id, project}} label="description"><%= project.description %></:col>
+  
+  <:action :let={{_id, project}}>
+    <div class="sr-only">
+      <.link navigate={~p"/admin/projects/#{project}"}>Show</.link>alias
+    </div>
+    <.link patch={~p"/admin/project/#{project}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, project}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: project.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+
+
+
+<.modal :if={@live_action in [:new, :edit]} id="location-modal" show on_cancel={JS.patch(~p"/admin/projects")}>
+  
+  <.live_component
+    module={CanvasAppWeb.ProjectLive.FormComponent}
+    id={@project.id || :new}
+    title={@page_title}
+    action={@live_action}
+    project={@project}
+    patch={~p"/admin/projects"}
+  />
+</.modal> 
+
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
