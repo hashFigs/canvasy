@@ -21,6 +21,29 @@
   </head>
 
   <body>
+<div class="flex">
+  <!-- Left Column (Menu) -->
+  <div class="bg-orange-400 text-white w-1/4 py-6">
+    <div class="text-center text-2xl font-semibold mb-6">Admin Menu</div>
+    <ul>
+      <li class="mb-2">
+        <a href="/admin/dashboard" class="block px-4 py-2 hover:bg-orange-600">Dashboard</a>
+      </li>
+      <li class="mb-2">
+        <a href="/admin/projects" class="block px-4 py-2 hover:bg-orange-600">Projects</a>
+      </li>
+      <li class="mb-2">
+        <a href="/admin/users" class="block px-4 py-2 hover:bg-orange-600">Users</a>
+      </li>
+      <li class="mb-2">
+        <a href="/locations" class="block px-4 py-2 hover:bg-orange-600">Locations</a>
+      </li>
+      <!-- Add more menu items as needed -->
+    </ul>
+  </div>
+  <!-- Right Column (Content) -->
+  <div class="w-3/4 p-6">
+
 <.header>
   Listing Projects
 
@@ -57,6 +80,9 @@
   </:action>
 </.table>
 
+
+
+
 <.modal :if={@live_action in [:new, :edit]} id="location-modal" show on_cancel={JS.patch(~p"/admin/projects")}>
   
   <.live_component
@@ -69,6 +95,21 @@
   />
 </.modal> 
 
-
+</div>
+</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
