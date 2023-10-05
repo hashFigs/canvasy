@@ -7,8 +7,8 @@ defmodule CanvasApp.Accounts.Account do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
-    field :admin, :boolean, default: false # Add this line for the admin field
-
+    # Add this line for the admin field
+    field :admin, :boolean, default: false
 
     timestamps()
   end

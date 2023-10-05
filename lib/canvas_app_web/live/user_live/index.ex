@@ -4,11 +4,9 @@ defmodule CanvasAppWeb.UserLive.Index do
   alias CanvasApp.Members.User
   alias CanvasApp.Places.Location
 
-
   @impl true
   def mount(_params, _session, socket) do
-
-    {:ok, stream(socket, :users,  Members.list_users())}
+    {:ok, stream(socket, :users, Members.list_users())}
   end
 
   @impl true
@@ -16,15 +14,12 @@ defmodule CanvasAppWeb.UserLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-
   defp apply_action(socket, :index, _params) do
-
-   #users = Members.list_users()
+    # users = Members.list_users()
 
     socket
     |> assign(:page_title, "Listing Locations")
     |> assign(:user, nil)
-
   end
 
   defp apply_action(socket, :new, _params) do
@@ -32,7 +27,6 @@ defmodule CanvasAppWeb.UserLive.Index do
     |> assign(:page_title, "New User")
     |> assign(:location, %Location{})
     |> assign(:user, %User{})
-
   end
 
   @impl true
@@ -42,6 +36,4 @@ defmodule CanvasAppWeb.UserLive.Index do
 
     {:noreply, stream_delete(socket, :users, user)}
   end
-
-
 end

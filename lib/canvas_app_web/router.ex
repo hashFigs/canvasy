@@ -30,17 +30,14 @@ defmodule CanvasAppWeb.Router do
     live "/locations/:id", LocationLive.Show, :show
     live "/locations/:id/edit", LocationLive.Show, :edit
 
-    #live "/", LocationLive.Index, :index
+    # live "/", LocationLive.Index, :index
     live "/", LandingLive.Index, :index
 
     live "/users", UserLive.Index, :index
     live "/users/new", UserLive.Index, :new
-
   end
 
-
   if Application.compile_env(:canvas_app, :dev_routes) do
-
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
@@ -68,27 +65,25 @@ defmodule CanvasAppWeb.Router do
   end
 
   scope "/", CanvasAppWeb do
-    pipe_through [:browser, :require_authenticated_account ]
+    pipe_through [:browser, :require_authenticated_account]
 
     live_session :require_authenticated_account,
       on_mount: [{CanvasAppWeb.AccountAuth, :ensure_authenticated}] do
       live "/accounts/settings", AccountSettingsLive, :edit
       live "/accounts/settings/confirm_email/:token", AccountSettingsLive, :confirm_email
 
-     # live "/admin", AdminIndexLive
+      # live "/admin", AdminIndexLive
     end
   end
 
   scope "/", CanvasAppWeb do
     pipe_through [:browser, :require_authenticated_account, :admin]
 
-      live "/admin", AccountLive.Admin.AdminIndexLive
-      live "/admin/dashboard", AccountLive.Admin.AdminDashboardLive
-      live "/admin/members", UserLive.Import, :import
-      live "/admin/projects", ProjectLive.Index, :index
-      live "/admin/projects/new", ProjectLive.Index, :new
-
-
+    live "/admin", AccountLive.Admin.AdminIndexLive
+    live "/admin/dashboard", AccountLive.Admin.AdminDashboardLive
+    live "/admin/members", UserLive.Import, :import
+    live "/admin/projects", ProjectLive.Index, :index
+    live "/admin/projects/new", ProjectLive.Index, :new
   end
 
   scope "/", CanvasAppWeb do
@@ -97,7 +92,6 @@ defmodule CanvasAppWeb.Router do
     get "/sample-csv", CsvController, :index
     live "/users/import", UserLive.Import, :import
   end
-
 
   scope "/", CanvasAppWeb do
     pipe_through [:browser]

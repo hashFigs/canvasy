@@ -5,6 +5,5 @@ defmodule CanvasApp.Repo.Migrations.UserBelongsToLocation do
     alter table(:users) do
       add :location_id, references(:locations)
     end
-
   end
 end

@@ -1,7 +1,7 @@
 defmodule CanvasApp.Members.User do
   use Ecto.Schema
   import Ecto.Changeset
-  #alias CanvasApp.Members.User
+  # alias CanvasApp.Members.User
   alias CanvasApp.Places.Location
 
   schema "users" do
@@ -19,5 +19,4 @@ defmodule CanvasApp.Members.User do
     |> cast(attrs, [:name, :surname])
     |> validate_required([:name, :surname])
   end
-
 end

@@ -2,8 +2,8 @@ defmodule CanvasAppWeb.LocationLive.Show do
   use CanvasAppWeb, :live_view
 
   alias CanvasApp.Places
-  #alias CanvasApp.Members
-  #alias CanvasApp.Repo
+  # alias CanvasApp.Members
+  # alias CanvasApp.Repo
 
   @impl true
   def mount(_params, _session, socket) do
@@ -16,16 +16,13 @@ defmodule CanvasAppWeb.LocationLive.Show do
           optional(any) => any
         }) :: {:noreply, map}
 
-
-
   def handle_params(%{"id" => id}, _, socket) do
-
     ## Do AQUERI IN USERS AND GET THE ONE WITH LOCATION_ID = ID
-    #location = Places.get_location!(id)
-    #location_with_users = Repo.preload(location, :users)
+    # location = Places.get_location!(id)
+    # location_with_users = Repo.preload(location, :users)
 
-     location = Places.get_location_with_users!(id)
-     IO.inspect(location)
+    location = Places.get_location_with_users!(id)
+    IO.inspect(location)
     # IO.inspect(members)
     # [ member | _rest ] = members
 

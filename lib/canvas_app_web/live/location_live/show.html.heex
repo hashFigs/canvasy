@@ -1,52 +1,50 @@
-
-  <body onload="loadGoogleMaps()">
-   
+<body onload="loadGoogleMaps()">
   <div class="w-full h-70" id="googleMap2" phx-update="ignore">
     <div id="googleMap" style="width:100%;height:400px;"></div>
- </div>
-
- <div class="grid grid-cols-2 gap-4 my-4">
-    <div class="font-semibold" >Members Info:</div>
-    <div class="font-semibold" >Total Members: <%= length(@location.users) %></div>
- </div>
-
- <%= for user <- @location.users do %>
-  <div class="rounded-lg bg-emerald-200 my-4 p-4 shadow-md">
-    <div class="grid grid-cols-2 gap-4">
-      <div ><b>Name:</b> <%= user.name %></div>
-      <div> <b>Surname:</b> <%= user.surname %></div>
-    </div>
   </div>
- <% end %>
+
+  <div class="grid grid-cols-2 gap-4 my-4">
+    <div class="font-semibold">Members Info:</div>
+    <div class="font-semibold">Total Members: <%= length(@location.users) %></div>
+  </div>
+
+  <%= for user <- @location.users do %>
+    <div class="rounded-lg bg-emerald-200 my-4 p-4 shadow-md">
+      <div class="grid grid-cols-2 gap-4">
+        <div><b>Name:</b> <%= user.name %></div>
+        <div><b>Surname:</b> <%= user.surname %></div>
+      </div>
+    </div>
+  <% end %>
 
   <div class="rounded-lg bg-orange-200 my-4 p-4 shadow-md">
     <div class="grid grid-cols-2 gap-4">
-      <div ><b>Street:</b> <%= @location.street %></div>
-      <div> <b>Number:</b> <%= @location.num  %></div>
-      <div> <b>City:</b> <%= @location.city  %></div>
-      <div> <b>Zip:</b> <%= @location.zip %></div>
-      <div> <b>Latitude:</b> <%= @location.latitude %></div>
-      <div> <b>Longitude:</b> <%= @location.longitude %></div>
+      <div><b>Street:</b> <%= @location.street %></div>
+      <div><b>Number:</b> <%= @location.num %></div>
+      <div><b>City:</b> <%= @location.city %></div>
+      <div><b>Zip:</b> <%= @location.zip %></div>
+      <div><b>Latitude:</b> <%= @location.latitude %></div>
+      <div><b>Longitude:</b> <%= @location.longitude %></div>
     </div>
   </div>
 
+  <.back navigate={~p"/locations"}>Back to locations</.back>
 
-
-
-
-
-<.back navigate={~p"/locations"}>Back to locations</.back>
-
-<.modal :if={@live_action == :edit} id="location-modal" show on_cancel={JS.patch(~p"/locations/#{@location}")}>
-  <.live_component
-    module={CanvasAppWeb.LocationLive.FormComponent}
-    id={@location.id}
-    title={@page_title}
-    action={@live_action}
-    location={@location}
-    patch={~p"/locations/#{@location}"}
-  />
-</.modal>
+  <.modal
+    :if={@live_action == :edit}
+    id="location-modal"
+    show
+    on_cancel={JS.patch(~p"/locations/#{@location}")}
+  >
+    <.live_component
+      module={CanvasAppWeb.LocationLive.FormComponent}
+      id={@location.id}
+      title={@page_title}
+      action={@live_action}
+      location={@location}
+      patch={~p"/locations/#{@location}"}
+    />
+  </.modal>
 </body>
 
 <script>
@@ -71,12 +69,12 @@
     
   };
 </script>
-  <script>
-    function loadGoogleMaps() {
-      var script = document.createElement('script');
-      script.src = 'https://maps.googleapis.com/maps/api/js?key=' + '<%= System.get_env("GOOGLE_MAPS_API_KEY") %>' + '&callback=myMap';
-      script.async = true;
-      script.defer = true;
-      document.head.appendChild(script);
-    }
-  </script>
+<script>
+  function loadGoogleMaps() {
+    var script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + '<%= System.get_env("GOOGLE_MAPS_API_KEY") %>' + '&callback=myMap';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+</script>

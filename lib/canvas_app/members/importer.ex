@@ -1,5 +1,4 @@
 defmodule CanvasApp.Members.Importer do
-
   alias CanvasApp.Members.User
   alias CanvasApp.Members
 
@@ -8,7 +7,6 @@ defmodule CanvasApp.Members.Importer do
     |> CSV.encode()
     |> Enum.to_list()
   end
-
 
   def preview(rows) do
     rows
@@ -22,6 +20,7 @@ defmodule CanvasApp.Members.Importer do
 
   def import(rows) do
     IO.inspect(rows)
+
     rows
     |> transform_keys()
     |> Enum.map(fn attrs ->
@@ -44,5 +43,4 @@ defmodule CanvasApp.Members.Importer do
     |> String.replace(" ", "")
     |> Phoenix.Naming.underscore()
   end
-
 end

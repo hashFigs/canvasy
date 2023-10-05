@@ -66,5 +66,4 @@ defmodule CanvasAppWeb.UserLive.Import do
     end)
     |> List.flatten()
   end
-
 end

@@ -3,20 +3,16 @@ defmodule CanvasAppWeb.UserLive.FormComponent do
 
   alias CanvasApp.Members
 
-
-
   @impl true
   def render(assigns) do
     ~H"""
-
-
-  <div>
+    <div>
       <.header>
         <%= @title %>
         <:subtitle>Use this form to manage location records in your database.</:subtitle>
       </.header>
 
-      <h1> this is the new User / location form </h1>
+      <h1>this is the new User / location form</h1>
 
       <.simple_form
         for={@form}
@@ -25,7 +21,6 @@ defmodule CanvasAppWeb.UserLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:surname]} type="text" label="Surname" />
         <.input field={@form[:street]} type="text" label="Street" />
@@ -38,10 +33,8 @@ defmodule CanvasAppWeb.UserLive.FormComponent do
         </:actions>
       </.simple_form>
     </div>
-
-  """
+    """
   end
-
 
   @impl true
   def update(%{user: user} = assigns, socket) do
@@ -83,12 +76,17 @@ defmodule CanvasAppWeb.UserLive.FormComponent do
   end
 
   defp save_user(socket, :new, user_location_params) do
-
-    %{"city" => city, "name" => name, "num" => num, "street"=> street, "surname"=> surname, "zip" => zip} =  user_location_params
+    %{
+      "city" => city,
+      "name" => name,
+      "num" => num,
+      "street" => street,
+      "surname" => surname,
+      "zip" => zip
+    } = user_location_params
 
     location_params = %{street: street, num: num, zip: zip, city: city}
     user_params = %{name: name, surname: surname}
-
 
     case Members.create_association(user_params, location_params) do
       {:ok, _location, user} ->

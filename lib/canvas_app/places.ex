@@ -8,7 +8,6 @@ defmodule CanvasApp.Places do
 
   alias CanvasApp.Places.Location
 
-
   def list_locations do
     Repo.all(Location)
   end
@@ -21,9 +20,9 @@ defmodule CanvasApp.Places do
     |> Repo.insert()
   end
 
-   def hello do
-     IO.puts "hello"
-   end
+  def hello do
+    IO.puts("hello")
+  end
 
   @doc """
   Updates a location.
@@ -73,20 +72,18 @@ defmodule CanvasApp.Places do
     Repo.get(Location, id) |> Repo.preload(:users)
   end
 
-
   def change_location(%Location{} = location, attrs \\ %{}) do
     Location.changeset(location, attrs)
   end
 
   def find_location_by(attrs) do
     %{city: city, num: num, street: street, zip: zip} = attrs
-    query = from l in Location,
-      where: l.city == ^city and l.num == ^num and l.street == ^street and l.zip == ^zip,
-      limit: 1
 
-     Repo.one(query)
+    query =
+      from l in Location,
+        where: l.city == ^city and l.num == ^num and l.street == ^street and l.zip == ^zip,
+        limit: 1
+
+    Repo.one(query)
   end
-
-
-
 end
