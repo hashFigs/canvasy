@@ -21,7 +21,14 @@ defmodule CanvasApp.PlacesTest do
     end
 
     test "create_location/1 with valid data creates a location" do
-      valid_attrs = %{city: "some city", latitude: 120.5, longitude: 120.5, num: "some num", street: "some street", zip: "some zip"}
+      valid_attrs = %{
+        city: "some city",
+        latitude: 120.5,
+        longitude: 120.5,
+        num: "some num",
+        street: "some street",
+        zip: "some zip"
+      }
 
       assert {:ok, %Location{} = location} = Places.create_location(valid_attrs)
       assert location.city == "some city"
@@ -38,7 +45,15 @@ defmodule CanvasApp.PlacesTest do
 
     test "update_location/2 with valid data updates the location" do
       location = location_fixture()
-      update_attrs = %{city: "some updated city", latitude: 456.7, longitude: 456.7, num: "some updated num", street: "some updated street", zip: "some updated zip"}
+
+      update_attrs = %{
+        city: "some updated city",
+        latitude: 456.7,
+        longitude: 456.7,
+        num: "some updated num",
+        street: "some updated street",
+        zip: "some updated zip"
+      }
 
       assert {:ok, %Location{} = location} = Places.update_location(location, update_attrs)
       assert location.city == "some updated city"

@@ -12,23 +12,20 @@
     </script>
   </head>
   <body class="bg-white antialiased py-2">
-
     <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
       <%= if @current_account do %>
         <li class="text-[0.8125rem] leading-6 text-zinc-900">
           <%= @current_account.email %>
         </li>
-         <li>
-         <%= if @current_account.admin do %>   
-
-          <.link
-            href={~p"/admin"}
-             class="inline-block bg-orange-500 text-white px-4 py-1 text-sm font-semibold rounded-lg hover:bg-zinc-600"
-          >
-            AdminZone
-          </.link>   
+        <li>
+          <%= if @current_account.admin do %>
+            <.link
+              href={~p"/admin"}
+              class="inline-block bg-orange-500 text-white px-4 py-1 text-sm font-semibold rounded-lg hover:bg-zinc-600"
+            >
+              AdminZone
+            </.link>
           <% end %>
-
 
           <.link
             href={~p"/accounts/settings"}
@@ -68,9 +65,9 @@
     <%= @inner_content %>
   </body>
 
-      <footer class="bg-gray-200 py-6">
-        <div class="container mx-auto text-center">
-            <p class="text-gray-600">&copy; 2023 Canvasify. All rights reserved.</p>
-        </div>
-    </footer>
+  <footer class="bg-gray-200 py-6">
+    <div class="container mx-auto text-center">
+      <p class="text-gray-600">&copy; 2023 Canvasify. All rights reserved.</p>
+    </div>
+  </footer>
 </html>

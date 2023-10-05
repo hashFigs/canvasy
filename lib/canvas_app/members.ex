@@ -10,6 +10,7 @@ defmodule CanvasApp.Members do
   alias CanvasApp.Members.User
   alias CanvasApp.Places.Location
   alias CanvasApp.Places.MyGeocoder
+
   @doc """
   Returns the list of users.
 
@@ -52,75 +53,67 @@ defmodule CanvasApp.Members do
 
   """
 
-def create_association(user_params, location_params) do
- # location_params = %{street: "street", num: "num", zip: "zip", city: "city", latitude: 1.0, longitude: 1.0}
- # user_params = %{name: "name", surname: "surname"}
+  def create_association(user_params, location_params) do
+    # location_params = %{street: "street", num: "num", zip: "zip", city: "city", latitude: 1.0, longitude: 1.0}
+    # user_params = %{name: "name", surname: "surname"}
 
-  # Create and insert the Location
+    # Create and insert the Location
 
-  adress = "#{location_params.num}, #{location_params.street}, #{location_params.zip}, #{location_params.city}"
-  {:ok, {:ok,%{"lat" => _lat, "lng" => _lng}}}= MyGeocoder.geocode_address(adress)
+    adress =
+      "#{location_params.num}, #{location_params.street}, #{location_params.zip}, #{location_params.city}"
 
-   #geo_params = %{latitude: lat, longitude: lng}
-   #place_params = Map.merge(location_params, geo_params)
+    {:ok, {:ok, %{"lat" => _lat, "lng" => _lng}}} = MyGeocoder.geocode_address(adress)
 
+    # geo_params = %{latitude: lat, longitude: lng}
+    # place_params = Map.merge(location_params, geo_params)
 
-  location =
-    case Places.find_location_by(location_params) do
-      nil -> create_location(location_params)
-      existing_location -> existing_location
-    end
+    location =
+      case Places.find_location_by(location_params) do
+        nil -> create_location(location_params)
+        existing_location -> existing_location
+      end
 
+    # check if location exists
+    IO.puts("HOL!!@@@")
 
+    # location =  Places.find_location_by(location_params)
 
+    IO.inspect(location, label: "location")
 
-  #check if location exists
-  IO.puts "HOL!!@@@"
+    # if it doesnt exist create
+    # {:ok, location} = create_location(place_params)
 
-  #location =  Places.find_location_by(location_params)
+    # Create and insert the User, associating it with the Location
+    {:ok, user} = create_user_with_location(user_params, location)
 
+    {:ok, location, user}
+  end
 
-  IO.inspect(location, label: "location")
+  defp create_location(location_params) do
+    %Location{}
+    |> Location.changeset(location_params)
+    |> Repo.insert()
+  end
 
-  #if it doesnt exist create
-  #{:ok, location} = create_location(place_params)
+  defp create_user_with_location(user_params, location) do
+    %User{}
+    |> User.changeset(user_params)
+    |> Ecto.Changeset.put_assoc(:location, location)
+    |> Repo.insert()
+  end
 
-  # Create and insert the User, associating it with the Location
-  {:ok, user} = create_user_with_location(user_params, location)
-
-  {:ok, location, user}
-end
-
-defp create_location(location_params) do
-  %Location{}
-  |> Location.changeset(location_params)
-  |> Repo.insert()
-end
-
-defp create_user_with_location(user_params, location) do
-  %User{}
-  |> User.changeset(user_params)
-  |> Ecto.Changeset.put_assoc(:location, location)
-  |> Repo.insert()
-end
-
-def get_users_by_location(location) do
-
-  from u in User,
-    where: u.location_id == ^location.id,
-    select: u
-end
-
-
+  def get_users_by_location(location) do
+    from u in User,
+      where: u.location_id == ^location.id,
+      select: u
+  end
 
   def create_user(attrs \\ %{}) do
-    #check if location exists
+    # check if location exists
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
-
   end
-
 
   @doc """
   Updates a user.

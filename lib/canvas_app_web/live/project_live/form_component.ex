@@ -6,14 +6,13 @@ defmodule CanvasAppWeb.ProjectLive.FormComponent do
   @impl true
   def render(assigns) do
     ~H"""
-
-  <div>
+    <div>
       <.header>
         <%= @title %>
         <:subtitle>Use this form to manage projects records in your database.</:subtitle>
       </.header>
 
-      <h1> this is the new Project form </h1>
+      <h1>this is the new Project form</h1>
 
       <.simple_form
         for={@form}
@@ -22,7 +21,6 @@ defmodule CanvasAppWeb.ProjectLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:description]} type="text" label="Surname" />
 
@@ -31,10 +29,8 @@ defmodule CanvasAppWeb.ProjectLive.FormComponent do
         </:actions>
       </.simple_form>
     </div>
-
-  """
+    """
   end
-
 
   @impl true
   def update(%{project: project} = assigns, socket) do
@@ -76,13 +72,11 @@ defmodule CanvasAppWeb.ProjectLive.FormComponent do
   end
 
   defp save_project(socket, :new, project_params) do
-
-    %{"description" => description, "name" => name} =  project_params
+    %{"description" => description, "name" => name} = project_params
 
     project_params = %{name: name, description: description}
 
-
-    case Projects.create_project( project_params) do
+    case Projects.create_project(project_params) do
       {:ok, _location, project} ->
         notify_parent({:saved, project})
 

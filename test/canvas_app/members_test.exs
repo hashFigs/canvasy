@@ -4,7 +4,6 @@ defmodule CanvasApp.MembersTest do
   alias CanvasApp.Members
   alias CanvasApp.Places
 
-
   describe "users" do
     alias CanvasApp.Members.User
 
@@ -64,7 +63,5 @@ defmodule CanvasApp.MembersTest do
       {:ok, location, user} = Members.create_association()
       assert location.id == user.location_id
     end
-
-
   end
 end

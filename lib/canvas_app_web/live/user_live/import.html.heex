@@ -4,23 +4,31 @@
     Open up the file below in Excel, Google sheets or a similar
   </:subtitle>
   <:actions>
-    <.link href={~p"/sample-csv"} target="_blank" class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700">
+    <.link
+      href={~p"/sample-csv"}
+      target="_blank"
+      class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700"
+    >
       Download Sample CSV
     </.link>
   </:actions>
 </.header>
 
 <div class="my-12">
-  
-  <form :if={length(@parsed_rows) == 0} id="upload-form" phx-submit="parse" phx-change="validate" class="space-y-2">
+  <form
+    :if={length(@parsed_rows) == 0}
+    id="upload-form"
+    phx-submit="parse"
+    phx-change="validate"
+    class="space-y-2"
+  >
     <div class="p-4 border border-zinc-200 rounded" phx-drop-target={@uploads.sample_csv.ref}>
-     <.live_file_input upload={@uploads.sample_csv} />
+      <.live_file_input upload={@uploads.sample_csv} />
     </div>
-    
+
     <.button type="submit">Upload</.button>
   </form>
-  
-  
+
   <div :if={length(@parsed_rows) > 0} class="flex items-center space-x-2">
     <h3 class="text-base font-semibold">Upload a new csv file</h3>
     <.button type="button" phx-click="reset">Reset</.button>
@@ -32,8 +40,6 @@
   <.table id="customers" rows={@sample_users}>
     <:col :let={user} label="First name"><%= user.name %></:col>
     <:col :let={user} label="Last name"><%= user.surname %></:col>
-
-
   </.table>
   <p>This is a sample of the data to import</p>
   <.button type="button" phx-click="import">Import Now</.button>
@@ -41,6 +47,6 @@
 
 <div :if={@imported_users != []} class="space-y-2">
   <h3 class="text-xl font-bold">Import Result</h3>
-  <p>Success: <%= length(for {:ok, _} = row <- @imported_users , do: row) %> imports</p>
-  <p>Failed: <%= length(for {:error, _} = row <- @imported_users , do: row) %> imports</p>
+  <p>Success: <%= length(for {:ok, _} = row <- @imported_users, do: row) %> imports</p>
+  <p>Failed: <%= length(for {:error, _} = row <- @imported_users, do: row) %> imports</p>
 </div>

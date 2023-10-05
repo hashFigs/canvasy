@@ -2,22 +2,18 @@ defmodule CanvasAppWeb.LocationLive.FormComponent do
   use CanvasAppWeb, :live_component
 
   alias CanvasApp.Places
-  #alias CanvasApp.Places.Location
-
-
+  # alias CanvasApp.Places.Location
 
   @impl true
   def render(assigns) do
     ~H"""
-
-
-  <div>
+    <div>
       <.header>
         <%= @title %>
         <:subtitle>Use this form to manage location records in your database.</:subtitle>
       </.header>
 
-      <h1> this is the new User / location form </h1>
+      <h1>this is the new User / location form</h1>
 
       <.simple_form
         for={@form}
@@ -26,7 +22,6 @@ defmodule CanvasAppWeb.LocationLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-
         <.input field={@form[:street]} type="text" label="Street" />
         <.input field={@form[:num]} type="text" label="Number" />
         <.input field={@form[:city]} type="text" label="City" />
@@ -38,10 +33,8 @@ defmodule CanvasAppWeb.LocationLive.FormComponent do
         </:actions>
       </.simple_form>
     </div>
-
-  """
+    """
   end
-
 
   @impl true
   def update(%{location: location} = assigns, socket) do
@@ -83,7 +76,7 @@ defmodule CanvasAppWeb.LocationLive.FormComponent do
   end
 
   defp save_location(socket, :new, location_params) do
-    case Places.create_location( location_params) do
+    case Places.create_location(location_params) do
       {:ok, location} ->
         notify_parent({:saved, location})
 

@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Users</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta charset="utf-8" />
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -20,63 +20,56 @@
   </head>
 
   <body>
-<.header>
-  Listing Users
+    <.header>
+      Listing Users
+      <:actions>
+        <.link patch={~p"/users/new"}>
+          <.button>New User with location</.button>
+        </.link>
+      </:actions>
+    </.header>
 
+    <.table id="locations" rows={@streams.users}>
+      <:col :let={{_id, user}} label="Name"><%= user.name %></:col>
+      <:col :let={{_id, user}} label="Surname"><%= user.surname %></:col>
+      <:col :let={{_id, user}} label="location Id"><%= user.location_id %></:col>
 
-  <:actions>
-    <.link patch={~p"/users/new"}>
-      <.button>New User with location</.button>
-    </.link>
-  </:actions>
-
-</.header>
-
-
-
-<.table
-  id="locations"
-  rows={@streams.users}
->
-  <:col :let={{_id, user}} label="Name"><%= user.name %></:col>
-  <:col :let={{_id, user}} label="Surname"><%= user.surname %></:col>
-  <:col :let={{_id, user}} label="location Id"><%= user.location_id %></:col>
-  
-  <:action :let={{_id, _user}}>
-    <div class="sr-only">
-     <!--
+      <:action :let={{_id, _user}}>
+        <div class="sr-only">
+          <!--
       TODO:
       <.link navigate={~p"/users/#{user}"}>Show</.link>alias
       -->
-    </div>
-    
-    <!--
+        </div>
+        <!--
       TODO: 
       <.link patch={~p"/users/#{user}/edit"}>Edit</.link>
     -->
-  </:action>
-  <:action :let={{id, user}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: user.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      </:action>
+      <:action :let={{id, user}}>
+        <.link
+          phx-click={JS.push("delete", value: %{id: user.id}) |> hide("##{id}")}
+          data-confirm="Are you sure?"
+        >
+          Delete
+        </.link>
+      </:action>
+    </.table>
+
+    <.modal
+      :if={@live_action in [:new, :edit]}
+      id="location-modal"
+      show
+      on_cancel={JS.patch(~p"/users")}
     >
-      Delete
-    </.link>
-  </:action>
-</.table>
-
-<.modal :if={@live_action in [:new, :edit]} id="location-modal" show on_cancel={JS.patch(~p"/users")}>
-  
-  <.live_component
-    module={CanvasAppWeb.UserLive.FormComponent}
-    id={@location.id || :new}
-    title={@page_title}
-    action={@live_action}
-    user={@user}
-    patch={~p"/users"}
-  />
-</.modal> 
-
-
-</body>
+      <.live_component
+        module={CanvasAppWeb.UserLive.FormComponent}
+        id={@location.id || :new}
+        title={@page_title}
+        action={@live_action}
+        user={@user}
+        patch={~p"/users"}
+      />
+    </.modal>
+  </body>
 </html>
