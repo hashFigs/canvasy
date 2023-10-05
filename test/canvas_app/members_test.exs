@@ -58,7 +58,5 @@ defmodule CanvasApp.MembersTest do
       user = user_fixture()
       assert %Ecto.Changeset{} = Members.change_user(user)
     end
-
-
   end
 end
