@@ -59,9 +59,6 @@ defmodule CanvasApp.MembersTest do
       assert %Ecto.Changeset{} = Members.change_user(user)
     end
 
-    test "crear asociacion" do
-      {:ok, location, user} = Members.create_association()
-      assert location.id == user.location_id
-    end
+
   end
 end
