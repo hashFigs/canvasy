@@ -66,19 +66,15 @@ defmodule CanvasAppWeb.Router do
 
   scope "/", CanvasAppWeb do
     pipe_through [:browser, :require_authenticated_account]
-
     live_session :require_authenticated_account,
       on_mount: [{CanvasAppWeb.AccountAuth, :ensure_authenticated}] do
       live "/accounts/settings", AccountSettingsLive, :edit
       live "/accounts/settings/confirm_email/:token", AccountSettingsLive, :confirm_email
-
-      # live "/admin", AdminIndexLive
     end
   end
 
   scope "/", CanvasAppWeb do
     pipe_through [:browser, :require_authenticated_account, :admin]
-
     live "/admin", AccountLive.Admin.AdminIndexLive
     live "/admin/dashboard", AccountLive.Admin.AdminDashboardLive
     live "/admin/members", UserLive.Import, :import
@@ -95,9 +91,7 @@ defmodule CanvasAppWeb.Router do
 
   scope "/", CanvasAppWeb do
     pipe_through [:browser]
-
     delete "/accounts/log_out", AccountSessionController, :delete
-
     live_session :current_account,
       on_mount: [{CanvasAppWeb.AccountAuth, :mount_current_account}] do
       live "/accounts/confirm/:token", AccountConfirmationLive, :edit
