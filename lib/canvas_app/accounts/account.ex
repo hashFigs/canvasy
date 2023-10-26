@@ -1,6 +1,7 @@
 defmodule CanvasApp.Accounts.Account do
   use Ecto.Schema
   import Ecto.Changeset
+  alias CanvasApp.Projects.Project
 
   schema "accounts" do
     field :email, :string
@@ -10,6 +11,7 @@ defmodule CanvasApp.Accounts.Account do
     # Add this line for the admin field
     field :admin, :boolean, default: false
 
+    has_many :projects, Project
     timestamps()
   end
 

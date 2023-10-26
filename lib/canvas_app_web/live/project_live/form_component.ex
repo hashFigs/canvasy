@@ -9,7 +9,7 @@ defmodule CanvasAppWeb.ProjectLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage projects records in your database.</:subtitle>
+
       </.header>
 
       <h1>this is the new Project form</h1>
@@ -22,7 +22,7 @@ defmodule CanvasAppWeb.ProjectLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:description]} type="text" label="Surname" />
+        <.input field={@form[:description]} type="text" label="Description" />
 
         <:actions>
           <.button phx-disable-with="Saving...">Save Project</.button>
@@ -53,8 +53,18 @@ defmodule CanvasAppWeb.ProjectLive.FormComponent do
   end
 
   def handle_event("save", %{"project" => project_params}, socket) do
-    save_project(socket, socket.assigns.action, project_params)
+
+    userid = socket.assigns
+    IO.puts("sdsdsdsd@@@@ß")
+    IO.puts(inspect(userid))
+    # Add user_id to project_params
+    project_params_with_user_id = Map.put(project_params, "account_id", 1)
+
+    save_project(socket, socket.assigns.action, project_params_with_user_id)
   end
+
+
+
 
   defp save_project(socket, :edit, project_params) do
     case Projects.update_project(socket.assigns.project, project_params) do
@@ -74,7 +84,7 @@ defmodule CanvasAppWeb.ProjectLive.FormComponent do
   defp save_project(socket, :new, project_params) do
     %{"description" => description, "name" => name} = project_params
 
-    project_params = %{name: name, description: description}
+    _project_params4 = %{name: name, description: description, user_id: 1}
 
     case Projects.create_project(project_params) do
       {:ok, _location, project} ->

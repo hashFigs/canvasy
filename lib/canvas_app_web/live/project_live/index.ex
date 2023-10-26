@@ -13,6 +13,8 @@ defmodule CanvasAppWeb.ProjectLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
+
+
   defp apply_action(socket, :index, _params) do
     # projects = Projects.list_projects()
 
